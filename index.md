@@ -15,21 +15,27 @@ This training course will introduce you to the basic concepts of data acquisitio
             <th></th>
             <th align="center">Monday</th>
             <th align="center">Tuesday</th>
+            <th align="center">Wednesday</th>
             <th align="center">Thursday</th>
+            <th align="center">Friday</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Morning</td>
+            <td>Seminar</td>
             <td style="color:chocolate" align="center">Introduction to Bonsai</td>
-            <td style="color:chocolate" align="center">Operant behavior</td>
-            <td style="color:darkgoldenrod" align="center">Final projects</td>
+            <td style="color:chocolate" align="center">BonZeb + Synching</td>
+            <td style="color:chocolate" align="center">Advanced Concepts</td>
+            <td style="color:chocolate" align="center">BonVision</td>
+            <td style="color:chocolate" align="center">DeepLabCut + Automation</td>
         </tr>
         <tr>
-            <td>Afternoon</td>
+            <td>Workshop</td>
             <td style="color:cornflowerblue" align="center">Cameras, tracking, microcontrollers</td>
-            <td style="color:cornflowerblue" align="center">Real-time closed-loop experiments</td>
-            <td></td>
+            <td style="color:cornflowerblue" align="center">Closed-loop experiments</td>
+            <td style="color:cornflowerblue" align="center">Operant behavior</td>
+            <td style="color:cornflowerblue" align="center">Visual psychophysics</td>
+            <td style="color:cornflowerblue" align="center">Final projects</td>
         </tr>
     </tbody>
 </table>

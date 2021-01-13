@@ -14,9 +14,9 @@ permalink: /slides/intro/
 
 ---
 
-### Biology and rapid prototyping
+### Neuroscience needs makers & hackers
 
-On the nature of experimental tools:
+On the nature of systems neuroscience tools:
 
 * Accessible
 <!-- .element: class="fragment" data-fragment-index="1" -->
