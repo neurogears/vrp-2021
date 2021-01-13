@@ -27,7 +27,7 @@ This training course will introduce you to the basic concepts of data acquisitio
             <td style="color:chocolate" align="center">BonZeb + Synching</td>
             <td style="color:chocolate" align="center">Advanced Concepts</td>
             <td style="color:chocolate" align="center">BonVision</td>
-            <td style="color:chocolate" align="center">DeepLabCut + Automation</td>
+            <td style="color:chocolate" align="center">DLC + Scripting</td>
         </tr>
         <tr>
             <td>Workshop</td>
