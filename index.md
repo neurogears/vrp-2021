@@ -24,10 +24,10 @@ This training course will introduce you to the basic concepts of data acquisitio
         <tr>
             <td>Seminar</td>
             <td style="color:chocolate" align="center">Introduction to Bonsai</td>
-            <td style="color:chocolate" align="center">BonZeb + Synching</td>
+            <td style="color:chocolate" align="center">DLC + Synching</td>
             <td style="color:chocolate" align="center">Advanced Concepts</td>
             <td style="color:chocolate" align="center">BonVision</td>
-            <td style="color:chocolate" align="center">DLC + Scripting</td>
+            <td style="color:chocolate" align="center">BonZeb + Scripting</td>
         </tr>
         <tr>
             <td>Workshop</td>
