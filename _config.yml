@@ -1,8 +1,8 @@
 title: Visual Reactive Programming
 description: A course on Visual Reactive Programming using Bonsai, developed by NeuroGEARS, Ltd.
-funding:
-funding_logo:
-funding_url:
+funding: These course materials are part of the Cajal NeuroKit advanced neuroscience training programme.
+funding_logo: cajal
+funding_url: http://cajal-training.org/neurokit/visual-reactive-programming-bonsai/
 google_analytics:
 theme: minima
 baseurl: "/vrp-2021"
