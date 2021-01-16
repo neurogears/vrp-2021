@@ -9,7 +9,7 @@ Getting Started
 
 1. Download Bonsai from [http://bonsai-rx.org](http://bonsai-rx.org).
 2. Install **Bonsai - Starter Pack** from the package manager. ![The Bonsai package manager]({{ site.baseurl }}/assets/images/packagemanager.png)
-3. Click the `Updates` tab on the left side of the screen and install any available upgrades.
+3. Click on the `Updates` tab at the top of the screen and install any available upgrades.
 4. Read [http://bonsai-rx.org/docs/editor](http://bonsai-rx.org/docs/editor) for an introduction to the user interface.
 
 Video Acquisition
@@ -32,12 +32,12 @@ Bonsai can be used to acquire and record data from many different devices. The e
 
 * Insert a `Grayscale` transform between `CameraCapture` and `VideoWriter`.
 * Run the workflow. The output should now be a grayscale movie.
-* Modify the workflow so that it records **both** a colour and a grayscale movie.
+* Modify the workflow so that it records **simultaneously** a colour and a grayscale movie.
 
 Audio Acquisition
 -----------------
 
-Audio data is captured at much higher temporal sampling frequencies than video. However, the data is typically buffered into chunks of multiple samples before being sent to the computer. Also, multiple audio channels can be acquired simultaneously in the case of a stereo microphone, or high-density ephys probes. For this reason, such multi-sample, multi-channel data is also typically represented as a 2D matrix of amplitude values, where rows represent channels, and columns represent time.
+Audio data is captured at much higher temporal sampling frequencies than video. However, the data is typically buffered into chunks of multiple samples before being sent to the computer. Also, multi-channel data can be acquired simultaneously in the case of a stereo microphone, or high-density ephys probes. Such multi-sample, multi-channel data is typically represented as a 2D matrix, where rows represent channels, and columns represent time.
 
 ### **Exercise 3:** Saving a WAV file
 
@@ -49,26 +49,18 @@ Audio data is captured at much higher temporal sampling frequencies than video. 
 * Make sure that the `SamplingFrequency` property of the `AudioWriter` matches the frequency of audio capture.
 * Run the workflow for some seconds. Playback the file in Windows Media Player to check that it is a valid audio file.
 
-### **Exercise 4:** Saving raw binary waveform data
+### **Exercise 4 (Optional):** Saving raw binary waveform data
 
 ![Saving raw binary waveform data]({{ site.baseurl }}/assets/images/acquisition-audiobinary.svg)
 
 * Replace the `AudioWriter` operator with a `MatrixWriter` sink.
 * Configure the `Path` property of the `MatrixWriter` operator with a file name ending in `.bin`.
 * Run the workflow for some seconds.
-* **Optional:** Open the resulting binary file in MATLAB/Python/R and make a time series plot of the raw waveform samples.
+* Open the resulting binary file in MATLAB/Python/R and make a time series plot of the raw waveform samples.
   * **MATLAB:** Use the [`fread`](https://www.mathworks.com/help/matlab/ref/fread.html) function to read the binary file. The source data must be set to `int16`.
-  * **Python:** Use the [`fromfile`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfile.html) in the [`numpy`](https://www.scipy.org/install.html) package to read the binary file. The `dtype` option must be set to `np.int16`.
+  * **Python:** Use the [`fromfile`](https://numpy.org/doc/stable/reference/generated/numpy.fromfile.html) in the [`numpy`](https://numpy.org/install/) package to read the binary file. The `dtype` option must be set to `np.int16`.
 
-### **Exercise 5 (Optional):** Record raw data from an OpenEphys board
-
-* Install the **Bonsai - Ephys Library** from the package manager.
-* Replace the `AudioCapture` source by an `Rhd2000EvalBoard` source.
-* Right-click the `Rhd2000EvalBoard` operator. Select the `Rhd2000DataFrame` > `AmplifierData` member from the context menu.
-* Connect the `AmplifierData` to the `MatrixWriter` operator.
-* Run the workflow and check that binary samples have been correctly recorded.
-
-### **Exercise 6:** Trigger an auditory stimulus
+### **Exercise 5:** Trigger an auditory stimulus
 
 ![Playback an audio file]({{ site.baseurl }}/assets/images/acquisition-audioplayback.svg)
 
@@ -84,19 +76,19 @@ Audio data is captured at much higher temporal sampling frequencies than video. 
 * Combine the key press with the audio data using the `WithLatestFrom` combinator.
 * Right-click the `WithLatestFrom` operator. Select the `Tuple` > `Item2` member from the context menu.
 * Move the `AudioPlayback` sink so that it follows the selected `Item2` member.
-* Run the workflow and press a key. What happens if you press several keys?
+* Run the workflow and press a key. What happens if you press the key several times?
 
 Arduino Acquisition
 -------------------
 
-In order to communicate and interact with an Arduino using Bonsai, you must setup a protocol for sending data to and from your host PC to the Arduino (via the USB cable). This can be a challenging task, as you will see later. Thankfully, Arduino already includes a standard implementation of a very efficient binary protocol called **Firmata** that can be used for serial communication with external applications.
+In order to communicate and interact with an Arduino using Bonsai, you must program the microcontroller to send and receive binary data from the computer via the USB cable. Fortunately, the Arduino environment already comes with a standard implementation of an efficient binary protocol called **[Firmata](https://github.com/firmata/arduino)** which can be used for serial communication with external applications such as Bonsai.
 
 ### Configure Arduino for real-time communication
 
 * Open the [Arduino IDE](https://www.arduino.cc/en/Main/Software).
 * Upload `StandardFirmata` to your Arduino. The code can be found in `File` > `Examples` > `Firmata`.
 
-### **Exercise 7:** Saving analog data
+### **Exercise 6:** Saving analog data
 
 ![Saving analog data]({{ site.baseurl }}/assets/images/acquisition-analog.svg)
 
@@ -108,7 +100,7 @@ In order to communicate and interact with an Arduino using Bonsai, you must setu
 * Configure the `FileName` property of the `CsvWriter` operator with a file name ending in `.csv`.
 * Run the workflow, record some interesting signal, and then open the result text data file.
 
-### **Exercise 8:** Control an LED
+### **Exercise 7:** Control an LED
 
 ![Control an LED]({{ site.baseurl }}/assets/images/acquisition-led.svg)
 
@@ -119,10 +111,23 @@ In order to communicate and interact with an Arduino using Bonsai, you must setu
 * Run the workflow and change the `Value` property of the `Boolean` operator.
 * **Optional:** Use your mouse to control the LED! Replace the `Boolean` operator by a `MouseMove` source (hint: use `GreaterThan`, `LessThan`, or equivalent operators to connect one of the mouse axis to `DigitalOutput`).
 
+### **Exercise 8:** Control a servo motor
+
+![Control a servo motor]({{ site.baseurl }}/assets/images/acquisition-servo.svg)
+
+* Insert a `Timer` source.
+* Insert a `Take` operator. Set its `Count` property to 10.
+* Insert a `Rescale` operator. Set its `Max` property to 10, and its `RangeMax` property to 180.
+* Insert a `Repeat` operator.
+* Insert a `ServoOutput` sink.
+* Set the `Pin` property of the `ServoOutput` operator to 9.
+* Configure the `PortName` property.
+* Connect a servo motor to the Arduino pin 9 and run the workflow. Can you explain the behaviour of the servo?
+
 Video Tracking
 --------------
 
-Bonsai allows processing the captured raw data to extract real-time measures of behaviour or other derived quantities. The exercises below will introduce you to some of its online video processing capabilities.
+Bonsai allows processing captured raw video data to extract real-time measures of behaviour or other derived quantities. The exercises below will introduce you to some of its online video processing capabilities.
 
 ### **Exercise 9:** Segmentation of a coloured object
 
@@ -137,9 +142,10 @@ This method segments coloured objects by setting boundaries directly on the BGR 
 
 ![Segmentation of a coloured object]({{ site.baseurl }}/assets/images/acquisition-segmentation2.svg)
 
-* Replace the `RangeThreshold` operator by a `ConvertColor` transform. This node converts the image from the BGR colour space to the Hue-Saturation-Value (HSV) colour space.
+* Replace the `RangeThreshold` operator by a `ConvertColor` transform. This node converts the image from the BGR colour space to the [Hue-Saturation-Value (HSV) colour space](https://en.wikipedia.org/wiki/HSL_and_HSV).
 * Insert an `HsvThreshold` transform.
-* Configure the `Lower`and `Upper` properties of the `HsvThreshold` to isolate the object. 
+* Configure the `Lower`and `Upper` properties of the `HsvThreshold` to isolate the object.
+* Test the resulting tracking under different illumination conditions.
 
 ### **Exercise 10:** Real-time position tracking
 
@@ -150,12 +156,13 @@ This method segments coloured objects by setting boundaries directly on the BGR 
 * Insert a `LargestBinaryRegion` transform to extract the largest detected object in the image.
 * Select the `ConnectedComponent` > `Centroid` field of the largest binary region using the context menu.
 * Record the position of the centroid using a `CsvWriter` sink.
+* **Optional:** Open the CSV file in Excel/Python/MATLAB/R and plot the trajectory of the object.
 
 ### **Exercise 11:** Background subtraction and motion segmentation
 
 ![Background subtraction]({{ site.baseurl }}/assets/images/acquisition-backsubtraction.svg)
 
-* Create a grayscale video stream similar to *Exercise 2*.
+* Create a grayscale video workflow similar to *Exercise 2*.
 * Insert a `Skip` operator. Set its `Count` property to 1.
 * In a new branch, insert a `Take` operator. Set its `Count` property to 1.
 * Combine the images from both branches using the `CombineLatest` combinator.
