@@ -24,10 +24,10 @@ This training course will introduce you to the basic concepts of data acquisitio
         <tr>
             <td>Seminar</td>
             <td style="color:chocolate" align="center">Introduction to Bonsai</td>
-            <td style="color:chocolate" align="center">DLC and Synchronization</td>
-            <td style="color:chocolate" align="center">Reactive State Machines</td>
+            <td style="color:chocolate" align="center">DeepLabCut<hr>Synchronization</td>
+            <td style="color:chocolate" align="center">Higher Order Operators</td>
             <td style="color:chocolate" align="center">BonVision</td>
-            <td style="color:chocolate" align="center">BonZeb and Automation</td>
+            <td style="color:chocolate" align="center">BonZeb<hr>Automation</td>
         </tr>
         <tr>
             <td>Workshop</td>
@@ -48,7 +48,7 @@ This training course will introduce you to the basic concepts of data acquisitio
 - Measuring behavior using voltages and an Arduino.
 
 ### Day 2 - Real-time closed-loop experiments
-- Markerless behavior tracking using Bonsai + DeepLabCut.
+- Markerless behavior tracking using [Bonsai + DeepLabCut](https://github.com/bonsai-rx/deeplabcut){:target="_blank"}.
 - Data synchronization and measuring closed-loop latency.
 - Conditional effects. Triggering a stimulus based on video activity.
 - Continuous feedback. Modulate stimulus intensity with speed or distance.
@@ -62,14 +62,14 @@ This training course will introduce you to the basic concepts of data acquisitio
 - Best practices for composing complex workflows.
 
 ### Day 4 - Interactive visual environments
-- Creating and controlling visual environments with BonVision.
+- Creating and controlling visual environments with [BonVision](https://bonvision.github.io/){:target="_blank"}.
 - Building closed-loop virtual reality experiments.
 - Combining real-time and non real-time logic.
 - Building variable trial structures.
 - Logging stimulus and response outcomes.
 
 ### Day 5 - Extending Bonsai
-- Multi-animal tracking and body part feature extraction with BonZeb.
+- Multi-animal tracking and body part feature extraction with [BonZeb](https://github.com/ncguilbeault/BonZeb){:target="_blank"}.
 - Reproducible deployment and automation of experiments.
 - Interfacing Bonsai with Python and MATLAB.
 - Bonsai hackathon and project presentations.
