@@ -24,50 +24,53 @@ This training course will introduce you to the basic concepts of data acquisitio
         <tr>
             <td>Seminar</td>
             <td style="color:chocolate" align="center">Introduction to Bonsai</td>
-            <td style="color:chocolate" align="center">DLC + Synching</td>
-            <td style="color:chocolate" align="center">Advanced Concepts</td>
+            <td style="color:chocolate" align="center">DLC and Synchronization</td>
+            <td style="color:chocolate" align="center">Reactive State Machines</td>
             <td style="color:chocolate" align="center">BonVision</td>
-            <td style="color:chocolate" align="center">BonZeb + Scripting</td>
+            <td style="color:chocolate" align="center">BonZeb and Automation</td>
         </tr>
         <tr>
             <td>Workshop</td>
-            <td style="color:cornflowerblue" align="center">Cameras, tracking, microcontrollers</td>
+            <td style="color:cornflowerblue" align="center">Acquisition and Tracking</td>
             <td style="color:cornflowerblue" align="center">Closed-loop experiments</td>
             <td style="color:cornflowerblue" align="center">Operant behavior</td>
-            <td style="color:cornflowerblue" align="center">Visual psychophysics</td>
+            <td style="color:cornflowerblue" align="center">Vision experiments</td>
             <td style="color:cornflowerblue" align="center">Final projects</td>
         </tr>
     </tbody>
 </table>
 
-### Session 1 - Introduction to Bonsai
-- What is visual reactive programming, and why should you care? Introduction to Bonsai.
-- How to measure almost anything with Bonsai. From quantities to bytes.
-- How to control almost anything with Bonsai. From bytes to effects.
-- How to measure and control multiple things at the same time with one computer.
-- Demos and applications: a whirlwind tour of Bonsai.
-
-### Session 2 - Cameras, tracking and microcontrollers
-- Measuring behavior using video.
-- Recording real-time video from multiple cameras.
-- Real-time tracking of colored objects, moving objects and contrasting objects: the basic toolkit.
+### Day 1 - Introduction to Bonsai
+- Introduction to Bonsai. What is visual reactive programming?
+- How to measure almost anything with Bonsai (from quantities to bytes).
+- How to control almost anything with Bonsai (from bytes to effects).
+- Real-time tracking of colored objects, moving objects and contrasting objects.
 - Measuring behavior using voltages and an Arduino.
-- A primer on data synchronization: on what frame did the light turn on?
 
-### Session 3 - Operant behavior tasks
-- Modeling trial sequences: states, events, and side-effects.
-- Driving state transitions with external inputs.
-- Choice, timeouts and conditional logic: the basic building blocks of reaction time, Go/No-Go and 2AFC tasks.
-- Combining real-time and non real-time logic for good measure.
-- Student project brainstorming
-
-### Session 4 - Real-time closed-loop experimentation
-- What can we learn from closed-loop experiments?
+### Day 2 - Real-time closed-loop experiments
+- Markerless behavior tracking using Bonsai + DeepLabCut.
+- Data synchronization and measuring closed-loop latency.
 - Conditional effects. Triggering a stimulus based on video activity.
 - Continuous feedback. Modulate stimulus intensity with speed or distance.
 - Feedback stabilization. Record video centered around a moving object.
-- Measuring closed-loop latency.
 
-### Session 5 - Final projects
-- Student project presentation
-- Where to next
+### Day 3 - Operant behavior tasks
+- Creating dynamic observable sequences with higher-order operators.
+- Modeling trial sequences: states, events, and side-effects.
+- Driving state transitions with external inputs.
+- Choice, timeouts and conditional logic. Building reaction time and Go/No-Go tasks.
+- Best practices for composing complex workflows.
+
+### Day 4 - Interactive visual environments
+- Creating and controlling visual environments with BonVision.
+- Building closed-loop virtual reality experiments.
+- Combining real-time and non real-time logic.
+- Building variable trial structures.
+- Logging stimulus and response outcomes.
+
+### Day 5 - Extending Bonsai
+- Multi-animal tracking and body part feature extraction with BonZeb.
+- Reproducible deployment and automation of experiments.
+- Interfacing Bonsai with Python and MATLAB.
+- Bonsai hackathon and project presentations.
+- Where Bonsai is going.
