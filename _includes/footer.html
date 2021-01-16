@@ -8,7 +8,7 @@
           <div class="footer-col footer-col-1">
             <ul class="contact-list">
               <li>{{ site.description | escape }}</li>
-              <li><a href="/"><img src="{{ site.baseurl }}/assets/images/neurogears.svg"></a></li>
+              <li><a href="/" target="_blank"><img src="{{ site.baseurl }}/assets/images/neurogears.svg"></a></li>
             </ul>
           </div>
     
@@ -43,7 +43,7 @@
                     {% endif %}
                     {% if site.funding_logo %}
                     <li>
-                      {% if site.funding_url %}<a href="{{ site.funding_url }}">{% endif %}
+                      {% if site.funding_url %}<a href="{{ site.funding_url }}" target="_blank">{% endif %}
                         <img src="{{ site.baseurl }}/assets/images/{{ site.funding_logo | slugify: 'pretty' }}.png"/>
                       {% if site.funding_url %}</a>{% endif %}
                     </li>
