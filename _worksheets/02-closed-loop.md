@@ -4,9 +4,60 @@ title: Closed-Loop Systems
 permalink: /worksheets/closed-loop/
 ---
 
-In a closed-loop system, the results of data processing feedback into the external world, establishing a relationship where the output of the system depends on the sensory input. Many behavioural experiments in neuroscience require some kind of closed-loop interaction between the subject and the experimental setup. The exercises below will show you how to use the online data processing capabilities of Bonsai to create many different kinds of closed-loop systems.
+In a closed-loop experiment, our data acquisition and processing system generates feedback into the external world, establishing a relationship where the output of the system depends on detected sensory input. Many behavioural experiments in neuroscience require some kind of closed-loop interaction between the subject and the experimental setup. The exercises below will show you how to use the online data processing capabilities of Bonsai to create and benchmark many different kinds of closed-loop systems.
 
-### **Exercise 1:** Triggering a digital line based on region of interest activity
+Measuring closed-loop latency
+-----------------------------
+
+One of the most important benchmarks to evaluate the performance of a closed-loop system is the latency, or the time it takes for a change in the output to be generated in response to a change in the input.
+
+The easiest way to measure the latency of a closed-loop system is to use a digital feedback test. In this test, we measure any binary output from the closed-loop system and feed it directly into the input sensor. We then record a series of measurements where we change the output to `HIGH` if the sensor detects that it is `LOW`, and change it to `LOW` if the sensor detects that it is `HIGH`. The time interval between the `HIGH` and `LOW` signals will give us the total closed-loop latency of the system, sometimes also known as the round-trip time.
+
+### **Exercise 1:** Measuring serial port communication latency
+
+![Arduino Closed-Loop Latency]({{ site.baseurl }}/assets/images/closed-loop-latency-arduino.svg)
+
+* Insert a `DigitalInput` source and set its `Pin` property to 8.
+* Insert a `BitwiseNot` transform.
+* Insert a `DigitalOutput` sink and configure its `Pin` property to pin 13.
+* Insert a `TimeInterval` operator.
+* Right-click on the `TimeInterval` operator and select `Output` > `Interval` > `TotalMilliseconds`.
+
+**Note:** The `TimeInterval` operator measures the interval between consecutive events in an observable sequence using the [high-precision event timer (HPET)](https://en.wikipedia.org/wiki/High_Precision_Event_Timer) in the computer. The HPET has a frequency of at least 10MHz, allowing us to accurately time intervals with sub-microsecond precision. Any timing measurements will be subject to hardware and communication jitter from the operating system.
+{: .notice--info}
+
+* Run the workflow and measure the round-trip time between event messages.
+
+### **Exercise 2:** Measuring video acquisition latency
+
+![Video Closed-Loop Latency]({{ site.baseurl }}/assets/images/closed-loop-latency-video.svg)
+
+* Insert a `CameraCapture` source.
+* Insert a `Crop` transform.
+* Run the workflow and use the `RegionOfInterest` property to select a small area around the LED.
+* Insert a `Sum (Dsp)` transform and select the `Val2` field from the output.
+
+**Note:** The `Sum (Dsp)` operator adds the value of all the pixels in the image together, across all the color channels. Assuming the default BGR format, the result of summing all the pixels in the Red channel of the image will be stored in `Val2`. `Val0` and `Val1` would store the Blue and Green values, respectively. If you are using an LED with a color other than Red, please select the output field accordingly.
+{: .notice--info}
+
+* Insert a `GreaterThan` transform.
+* Insert a `BitwiseNot` transform.
+* Insert a `DigitalOutput` sink and configure its `Pin` property to pin 13.
+* Run the workflow and use the visualizer of the `Sum` operator to choose an appropriate threshold for `GreaterThan`. When connected to pin 13, the LED should flash a couple of times when the Arduino is first connected.
+* Insert a [`DistinctUntilChanged`](https://bonsai-rx.org/docs/operators/distinctuntilchanged){:target="_blank"} operator after the `BitwiseNot` transform.
+
+**Note:** The `DistinctUntilChanged` operator filters consecutive duplicate items from an observable sequence. In this case, we want to change the value of the LED only when the threshold output changes from `LOW` to `HIGH`, or vice-versa. This will let us measure correctly the latency between detecting a change in the input and measuring the response to that change.
+{: .notice--info}
+
+* Insert the `TimeInterval` operator and select `Output` > `Interval` > `TotalMilliseconds`.
+* Run the workflow and measure the round-trip time between LED triggers.
+
+*Given the measurements obtained in Exercise 2, what would you estimate is the **input** latency for video acquisition?*
+
+Video Closed-Loop
+-----------------
+
+### **Exercise 3:** Triggering a digital line based on region of interest activity
 
 ![Triggering a digital line on ROI activity]({{ site.baseurl }}/assets/images/closed-loop-roi.svg)
 
@@ -30,7 +81,7 @@ In a closed-loop system, the results of data processing feedback into the extern
 **Note:** The `CropPolygon` operator uses the `Regions` property to define multiple, possibly non-rectangular regions. The visual editor is similar to `Crop`, where you draw a rectangular box. However, in `CropPolygon` you can move the corners of the box by right-clicking *inside* the box and dragging the cursor to the new position. You can add new points by double-clicking with the left mouse button, and delete points by double-clicking with the right mouse button. You can delete regions by pressing the `Del` key and cycle through selected regions by pressing the `Tab` key.
 {: .notice--info}
 
-### **Exercise 2:** Modulating stimulus intensity based on distance to a point
+### **Exercise 4:** Modulating stimulus intensity based on distance to a point
 
 ![Playing a dynamic sound]({{ site.baseurl }}/assets/images/closed-loop-generator.svg)
 
@@ -62,7 +113,7 @@ The result of the `Subtract` operator will be a vector pointing from the target 
 **Note:** You can specify inverse relationships using `Rescale` if you set the *maximum* input value to the `Min` property, and the *minimum* input value to the `Max` property. In this case, a small distance will generate a large output, and a large distance will produce a small output.
 {: .notice--info}
 
-### **Exercise 3:** Triggering a digital line based on distance between objects
+### **Exercise 5:** Triggering a digital line based on distance between objects
 
 ![Triggering a digital line based on distance between objects]({{ site.baseurl }}/assets/images/closed-loop-trigger.svg)
 
@@ -98,39 +149,37 @@ def process(value):
 * Connect the boolean output to Arduino pin 13 using a `DigitalOutput` sink.
 * Run the workflow and verify that the Arduino LED is triggered when the two objects are close together.
 
-  ### **Exercise 4:** Centring the video on a tracked object
+### **Exercise 6:** Centring the video on a tracked object
 
-  ![Shifting the video using warp affine]({{ site.baseurl }}/assets/images/closed-loop-warpaffine.svg)
+![Shifting the video using warp affine]({{ site.baseurl }}/assets/images/closed-loop-warpaffine.svg)
 
-  * Insert a `CameraCapture` source.
-  * Insert a `WarpAffine` transform. This node applies affine transformations on the input defined by the `Transform` matrix.
-  * Externalize the `Transform` property of the `WarpAffine` operator using the right-click context menu.
-  * Create an `AffineTransform` source and connect it to the externalized property.
-  * Run the workflow and change the values of the `Translation` property while visualizing the output of `WarpAffine`. Notice that the transformation induces a translation in the input image controlled by the values in the property.
+* Insert a `CameraCapture` source.
+* Insert a `WarpAffine` transform. This node applies affine transformations on the input defined by the `Transform` matrix.
+* Externalize the `Transform` property of the `WarpAffine` operator using the right-click context menu.
+* Create an `AffineTransform` source and connect it to the externalized property.
+* Run the workflow and change the values of the `Translation` property while visualizing the output of `WarpAffine`. Notice that the transformation induces a translation in the input image controlled by the values in the property.
 
-  ![Centring the video on a tracked object]({{ site.baseurl }}/assets/images/closed-loop-stabilization.svg)
+![Centring the video on a tracked object]({{ site.baseurl }}/assets/images/closed-loop-stabilization.svg)
 
-  * In a new branch, create a video tracking workflow using `ConvertColor`, `HsvThreshold`, and the `Centroid` operator to directly compute the centre of mass of a colored object.
-  * Insert a `Negate` transform. This will make the X and Y coordinates of the centroid negative.
+* In a new branch, create a video tracking workflow using `ConvertColor`, `HsvThreshold`, and the `Centroid` operator to directly compute the centre of mass of a colored object.
+* Insert a `Negate` transform. This will make the X and Y coordinates of the centroid negative.
 
-  We now want to map our negative centroid to the `Translation` property of `AffineTransform`, so that we dynamically translate each frame using the negative position of the object. You can do this by using property mapping operators, which are described in more detail at [http://bonsai-rx.org/docs/property-mapping](http://bonsai-rx.org/docs/property-mapping).
+We now want to map our negative centroid to the `Translation` property of `AffineTransform`, so that we dynamically translate each frame using the negative position of the object. You can do this by using property mapping operators, which are described in more detail at [http://bonsai-rx.org/docs/property-mapping](http://bonsai-rx.org/docs/property-mapping).
 
-  * Insert an `InputMapping` operator.
-  * Connect the `InputMapping` to the `AffineTransform` operator.
-  * Open the `PropertyMappings` editor and add a new mapping to the `Translation` property.
-  * Run the workflow. Verify that the object is always placed at position (0,0). What is the problem?
+* Insert an `InputMapping` operator.
+* Connect the `InputMapping` to the `AffineTransform` operator.
+* Open the `PropertyMappings` editor and add a new mapping to the `Translation` property.
+* Run the workflow. Verify that the object is always placed at position (0,0). What is the problem?
 
-  **Note:** Generally for image coordinates, (0,0) is at the top-left corner, and the center will be at coordinates (width/2, height/2), usually (320,240) for images with 640 x 480 resolution.
-  {: .notice--info}
+**Note:** Generally for image coordinates, (0,0) is at the top-left corner, and the center will be at coordinates (width/2, height/2), usually (320,240) for images with 640 x 480 resolution.
+{: .notice--info}
 
-  * Insert an `Add` transform. This will add a fixed offset to the point. Configure the `Value` property with an offset that will place the object at the image centre, e.g. (320,240).
-  * Run the workflow, and verify that the output of `WarpAffine` is now a video which is always centred on the tracked object.
-  * **Optional**: Insert a `Crop` transform after `WarpAffine` to select a bounded region around the object.
-  * **Optional**: Modify the object tracking workflow to use `FindContours` and `BinaryRegionAnalysis`.
-
+* Insert an `Add` transform. This will add a fixed offset to the point. Configure the `Value` property with an offset that will place the object at the image centre, e.g. (320,240).
+* Run the workflow, and verify that the output of `WarpAffine` is now a video which is always centred on the tracked object.
+* **Optional**: Insert a `Crop` transform after `WarpAffine` to select a bounded region around the object.
+* **Optional**: Modify the object tracking workflow to use `FindContours` and `BinaryRegionAnalysis`.
   
-### **Exercise 5:** Pan and Tilt Control based on the position of an object 
-
+### **Exercise 7:** Pan and Tilt Control based on the position of an object 
 
 ![Camera Capture with GateInterval]({{ site.baseurl }}/assets/images/closed-loop-PanTiltServosCameraCaptureWorkFlow.svg)
   
