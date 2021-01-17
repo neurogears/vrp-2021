@@ -115,7 +115,7 @@ In order to communicate and interact with an Arduino using Bonsai, you must prog
 
 ![Control a servo motor]({{ site.baseurl }}/assets/images/acquisition-servo.svg)
 
-* Insert a `Timer` source.
+* Insert a `Timer` source. Set its `Period` property to 500 ms.
 * Insert a `Take` operator. Set its `Count` property to 10.
 * Insert a `Rescale` operator. Set its `Max` property to 10, and its `RangeMax` property to 180.
 * Insert a `Repeat` operator.
