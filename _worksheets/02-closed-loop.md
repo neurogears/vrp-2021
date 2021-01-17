@@ -98,32 +98,89 @@ def process(value):
 * Connect the boolean output to Arduino pin 13 using a `DigitalOutput` sink.
 * Run the workflow and verify that the Arduino LED is triggered when the two objects are close together.
 
-### **Exercise 4:** Centring the video on a tracked object
+  ### **Exercise 4:** Centring the video on a tracked object
 
-![Shifting the video using warp affine]({{ site.baseurl }}/assets/images/closed-loop-warpaffine.svg)
+  ![Shifting the video using warp affine]({{ site.baseurl }}/assets/images/closed-loop-warpaffine.svg)
 
+  * Insert a `CameraCapture` source.
+  * Insert a `WarpAffine` transform. This node applies affine transformations on the input defined by the `Transform` matrix.
+  * Externalize the `Transform` property of the `WarpAffine` operator using the right-click context menu.
+  * Create an `AffineTransform` source and connect it to the externalized property.
+  * Run the workflow and change the values of the `Translation` property while visualizing the output of `WarpAffine`. Notice that the transformation induces a translation in the input image controlled by the values in the property.
+
+  ![Centring the video on a tracked object]({{ site.baseurl }}/assets/images/closed-loop-stabilization.svg)
+
+  * In a new branch, create a video tracking workflow using `ConvertColor`, `HsvThreshold`, and the `Centroid` operator to directly compute the centre of mass of a colored object.
+  * Insert a `Negate` transform. This will make the X and Y coordinates of the centroid negative.
+
+  We now want to map our negative centroid to the `Translation` property of `AffineTransform`, so that we dynamically translate each frame using the negative position of the object. You can do this by using property mapping operators, which are described in more detail at [http://bonsai-rx.org/docs/property-mapping](http://bonsai-rx.org/docs/property-mapping).
+
+  * Insert an `InputMapping` operator.
+  * Connect the `InputMapping` to the `AffineTransform` operator.
+  * Open the `PropertyMappings` editor and add a new mapping to the `Translation` property.
+  * Run the workflow. Verify that the object is always placed at position (0,0). What is the problem?
+
+  **Note:** Generally for image coordinates, (0,0) is at the top-left corner, and the center will be at coordinates (width/2, height/2), usually (320,240) for images with 640 x 480 resolution.
+  {: .notice--info}
+
+  * Insert an `Add` transform. This will add a fixed offset to the point. Configure the `Value` property with an offset that will place the object at the image centre, e.g. (320,240).
+  * Run the workflow, and verify that the output of `WarpAffine` is now a video which is always centred on the tracked object.
+  * **Optional**: Insert a `Crop` transform after `WarpAffine` to select a bounded region around the object.
+  * **Optional**: Modify the object tracking workflow to use `FindContours` and `BinaryRegionAnalysis`.
+
+  
+### **Exercise 5:** Pan and Tilt Control based on the position of an object 
+
+
+![Camera Capture with GateInterval]({{ site.baseurl }}/assets/images/closed-loop-PanTiltServosCameraCaptureWorkFlow.svg)
+  
 * Insert a `CameraCapture` source.
-* Insert a `WarpAffine` transform. This node applies affine transformations on the input defined by the `Transform` matrix.
-* Externalize the `Transform` property of the `WarpAffine` operator using the right-click context menu.
-* Create an `AffineTransform` source and connect it to the externalized property.
-* Run the workflow and change the values of the `Translation` property while visualizing the output of `WarpAffine`. Notice that the transformation induces a translation in the input image controlled by the values in the property.
+  
+* Insert a `GateInterval` combinator. This node limits the frame rate of the camera capture.  Configure the `Interval` property for 00:00:00.03 thus making the maximum frame rate of this node to 33.3 Frames per second.
 
-![Centring the video on a tracked object]({{ site.baseurl }}/assets/images/closed-loop-stabilization.svg)
+![Video tracking workflow]({{ site.baseurl }}/assets/images/closed-loop-PanTiltServosVideoTrackingWorkFlow.svg)
+  
+* Insert nodes to  complete a video tracking workflow using `ConvertColor`, `HsvThreshold`, and the `Centroid` operator.
 
-* In a new branch, create a video tracking workflow using `ConvertColor`, `HsvThreshold`, and the `Centroid` operator to directly compute the centre of mass of a colored object.
-* Insert a `Negate` transform. This will make the X and Y coordinates of the centroid negative.
+We now will need to rescale X and Y properties of the centroid that are in image coordinates, to respective pan and tilt servo motor actuaction coordinates. These wil be incremental and related to the current motor position, regarding the observed location of the object.
 
-We now want to map our negative centroid to the `Translation` property of `AffineTransform`, so that we dynamically translate each frame using the negative position of the object. You can do this by using property mapping operators, which are described in more detail at [http://bonsai-rx.org/docs/property-mapping](http://bonsai-rx.org/docs/property-mapping).
+![Rescale Coordinates ]({{ site.baseurl }}/assets/images/closed-loop-PanTiltServosVideoTrackingRescaleWorkFlow.svg)
+* Insert a `Rescale` transform operator after `X` output from the `Centroid`.
+* Connect image `Whidth` Output of the image from the `Caputure device` to the `Max` externalized asd property of the `Rescale` that is connected to the `X` output component of the `Centroid`, set the ´Min´ property of the rescale to 0, set RangeMax and RangeMin property to 7 and -7 respectively.
+* Copy the `Rescale` after the `Y` output from the `Centroid` 
+* Connect `Height` output from the `Camera Capture` to the `Max` property of the `Rescale` that is connected to the `Y` output component of the `Centroid`.
 
-* Insert an `InputMapping` operator.
-* Connect the `InputMapping` to the `AffineTransform` operator.
-* Open the `PropertyMappings` editor and add a new mapping to the `Translation` property.
-* Run the workflow. Verify that the object is always placed at position (0,0). What is the problem?
+Now there is the need to send the values to the Servo, but they need to be accumulate because our workflow is calculating small servo movements related to the actual position of the servo. We also need to be aware of the servo limits not to damage the motors, to accomplish this goal we will use Python transform. 
 
-**Note:** Generally for image coordinates, (0,0) is at the top-left corner, and the centre will be at coordinates (width/2, height/2), usually (320,240) for images with 640 x 480 resolution.
+![Pan and Tilt Tracking With Pan and Tilt Servos]({{ site.baseurl }}/assets/images/closed-loop-PanTiltServos.svg)  
+
+* Insert a `PythonTransform` operator after `Rescale`. Change the `Script` property to the following code:
+
+```python
+acc = 90.0
+
+@returns(float)
+def process(value):
+  global acc
+  temp = acc+value
+  if (20.0 < temp and temp < 160):
+     acc = temp
+  return acc
+```
+* Insert a `ServoOutput`at the end of each `PythonTransform`.
+* Configure the Pin of the `Pin` property to the arduino Pins where the Pan and Tilt motors are connected in the `X` and `Y` branches respectively.
+* Configure the `PortName` to the Arduino port where the micro-controller is connected.
+
+**Note:** To be able to execute this exercise you will need to have already assembled the Pan and Tilt motor Kits.
+Here are some instructions:
 {: .notice--info}
 
-* Insert an `Add` transform. This will add a fixed offset to the point. Configure the `Value` property with an offset that will place the object at the image centre, e.g. (320,240).
-* Run the workflow, and verify that the output of `WarpAffine` is now a video which is always centred on the tracked object.
-* **Optional**: Insert a `Crop` transform after `WarpAffine` to select a bounded region around the object.
-* **Optional**: Modify the object tracking workflow to use `FindContours` and `BinaryRegionAnalysis`.
+:-------------------------:|:-------------------------:
+![Pan and Tilt Assembly 1]({{ site.baseurl }}/assets/images/Pan-tilt-assembly01.jpg) | ![Pan and Tilt Assembly 2]({{ site.baseurl }}/assets/images/Pan-tilt-assembly02.jpg)
+![Pan and Tilt Assembly 3]({{ site.baseurl }}/assets/images/Pan-tilt-assembly03.jpg) | ![Pan and Tilt Assembly 4]({{ site.baseurl }}/assets/images/Pan-tilt-assembly04.jpg)
+{: .notice--info}
+
+* Connect the IO Expansion board to the Arduino Board.
+![IO Expansion Board]({{ site.baseurl }}/assets/images/IOExpansionBoard.png)
+* Connect the servo motors to the servo pins in the board.
+{: .notice--info}
