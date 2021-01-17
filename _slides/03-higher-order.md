@@ -1,7 +1,7 @@
 ---
 layout: slides
-title: 2. Operant Behavior
-permalink: /slides/operant/
+title: Higher Order Operators
+permalink: /slides/higher-order/
 ---
 
 <section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
@@ -9,7 +9,7 @@ permalink: /slides/operant/
 
 ![Bonsai](../../assets/images/bonsai-lettering.svg)
 
-### Operant Behavior
+### Higher Order Operators
 [bonsai-rx.org](http://bonsai-rx.org)
 
 ---
