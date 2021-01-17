@@ -1,6 +1,6 @@
 ---
 layout: slides
-title: 1. Introduction to Bonsai
+title: Introduction to Bonsai
 permalink: /slides/intro/
 ---
 
@@ -9,8 +9,18 @@ permalink: /slides/intro/
 
 ![Bonsai](../../assets/images/bonsai-lettering.svg)
 
-### Visual Reactive Programming
-[bonsai-rx.org](http://bonsai-rx.org)
+### Introduction to Bonsai
+[neurogears.org/vrp-2021](https://neurogears.org/vrp-2021)
+<table style="width: 100%;">
+  <tr>
+    <th style="vertical-align: middle; width: 50%; height: 100px; padding-left: 100px">
+      <img alt="NeuroGEARS" src="../../assets/images/neurogears.svg"/>
+    </th>
+    <th style="vertical-align: middle; width: 50%; height: 100px; align: right">
+      <img alt="Cajal" src="../../assets/images/cajal.png"/>
+    </th>
+  </tr>
+</table>
 
 ---
 
@@ -40,8 +50,6 @@ On the nature of systems neuroscience tools:
 
 <!-- Raw HTML for embedded iframe backgrounds -->
 <section data-background="#000000">
-    <section data-background-iframe="https://www.youtube.com/embed/qXcIZ1R68SQ?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;playlist=qXcIZ1R68SQ&amp;showinfo=0&amp;rel=0&amp;html5=1">
-    </section>
     <section data-background-iframe="https://www.youtube.com/embed/jKB0d9vsfgA?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;start=108&amp;playlist=jKB0d9vsfgA&amp;showinfo=0&amp;rel=0&amp;html5=1">
       <table style="height: 20%; margin-top: 65%; margin-left: -78px;">
         <tr><th>.txt interactive digital performance</th></tr>
@@ -62,9 +70,9 @@ On the nature of systems neuroscience tools:
         <tr><th>Lorenza Calcaterra, Kampff Lab</th></tr>
       </table>
     </section>
-    <section data-background-iframe="https://www.youtube.com/embed/nH41R0_RUgc?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;playlist=nH41R0_RUgc&amp;showinfo=0&amp;rel=0&amp;html5=1">
+    <section data-background-iframe="https://www.youtube.com/embed/mJDV07ptQFk?start=40&amp;controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;showinfo=0&amp;rel=0&amp;html5=1">
       <table style="height: 20%; margin-top: 65%; margin-left: -78px;">
-        <tr><th>André Cordeiro, Nelson Saibo Lab, ITQB</th></tr>
+        <tr><th>George Dimitriadis, Kampff Lab</th></tr>
       </table>
     </section>
 </section>
@@ -74,70 +82,28 @@ On the nature of systems neuroscience tools:
 
 ![Devices compatible with Bonsai](../../assets/images/bonsai-packages.svg)
 
----
-
-#### Hardware synchronized acquisition & control
-![Harp-Bonsai](../../assets/images/bonsai-harp.svg)
-
 </script>
 </section>
 
 <!-- Raw HTML for embedded iframe backgrounds -->
 <section>
-  <section data-transition="fade-out fade-in">
-    <h4>Modular data acquisition interface for neuroscience</h4>
-    <img src="https://images.squarespace-cdn.com/content/v1/53039db8e4b0649958e13c7b/1574273113210-4CX9F2C8RR2CVILOW4VQ/ke17ZwdGBToddI8pDm48kGuuwVLPS_RP0tQbXFCYQD0UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYwL8IeDg6_3B-BRuF4nNrNcQkVuAT7tdErd0wQFEGFSnDI_fzWSjG-nTaKLKwXhqxN-PosbykKAe4VpyL0BddSzrVR2hKTmxZKiCvfb0xUQVA/common_interface_header.png?format=1500w" alt="ONI - Open Neuro Interface" />
-    <a href="https://open-ephys.org/next-gen-acquisition-system">open-ephys.org/next-gen-acquisition-system</a>
-  </section>
-  <section data-transition="fade-out fade-in">
-    <h4>Modular data acquisition interface for neuroscience</h4>
-    <img src="https://images.squarespace-cdn.com/content/v1/53039db8e4b0649958e13c7b/1574733798710-FEMR4HF1R5I4J8BX8UEB/ke17ZwdGBToddI8pDm48kA47qaxzGU3oa60Mv3IrElh7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0hGaawTDWlunVGEFKwsEdnE_ZbuhWuTjDl9Hn0Vaidb23CyzgPgNZ_l0zINYXrCLdg/image%2B%25283%2529.jpg?format=1500w" alt="Starter Kit">
-    <a href="https://open-ephys.org/next-gen-acquisition-system">open-ephys.org/next-gen-acquisition-system</a>
-  </section>
-  <section data-background-iframe="https://www.youtube.com/embed/8xC404aTSUo?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;playlist=wwU6TzUJxNU&amp;showinfo=0&amp;rel=0&amp;html5=1">
-    <table style="height: 20%; margin-top: 65%; margin-left: -78px;">
-      <tr><th>Next gen open ephys 3d tracking</th></tr>
-    </table>
+  <section>
+    <h4>Real-time markerless pose estimation</h4>
+    <img src="../../assets/images/bonsai-dlc.svg" alt="Bonsai-DeepLabCut" />
+    <iframe src="https://www.youtube.com/embed/0aachcS0CUY?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;playlist=0aachcS0CUY&amp;showinfo=0&amp;rel=0&amp;html5=1" width="500px" height="300px"></iframe>
+    <a href="https://github.com/bonsai-rx/deeplabcut/">github.com/bonsai-rx/deeplabcut</a>
   </section>
   <section>
-    <h4></h4>
-    <img src="https://images.squarespace-cdn.com/content/v1/53039db8e4b0649958e13c7b/1563647325514-888R4JTXR232PAGYQT0U/ke17ZwdGBToddI8pDm48kB3IFERSih8gSc9gwbTEaQN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0qwNYAhhCBGzdWC7lMoYU-ya3ojHJMwcNa85ssvbLJl-kO2cj3f-oxvdCV5LnVd2Cw/image-asset.png?format=750w" alt="ONI and Bonsai">
-    <small>Simultaneous 64-channel ephys, 3D-tracking, accelerometer and gyroscope measurements, and optogenetic and electrical stimulation, all acquired and controlled through Bonsai.</small>
-    <a href="https://open-ephys.org/next-gen-acquisition-system">open-ephys.org/next-gen-acquisition-system</a>
-  </section>
-</section>
-
-<!-- Raw HTML for embedded iframe backgrounds -->
-<section>
-  <section data-background-iframe="https://www.youtube.com/embed/0aachcS0CUY?controls=0&amp;enablejsapi=1&amp;autoplay=1&amp;loop=1&amp;playlist=wwU6TzUJxNU&amp;showinfo=0&amp;rel=0&amp;html5=1">
-    <table style="height: 20%; margin-top: 65%; margin-left: -78px; color: white;">
-      <tr><th>Bonsai + DeepLabCut Live</th></tr>
-    </table>
-  </section>
-  <section>
-    <img src="../../assets/images/bonsai-dlc.svg" alt="DLC Pipeline">
-  </section>
-</section>
-
-<!-- Raw HTML for embedded iframe backgrounds -->
-<section>
-  <section data-transition="fade-out fade-in">
-    <h4>Open-source visual environment generator</h4>
-    <img src="../../assets/images/bonsai-bonvision.svg" alt="BonVision-Bonsai" />
+    <h4>Interactive visual environments</h4>
+    <img src="../../assets/images/bonsai-bonvision.svg" alt="BonVision" />
     <img src="https://bonvision.github.io/assets/Images/Demos/DemoAR_v3.gif" width="50%" alt="Augmented Reality in BonVision" />
     <a href="https://bonvision.github.io/">bonvision.github.io</a>
   </section>
-  <section data-transition="fade-out fade-in">
-    <h4>Handles 2D and 3D stimuli with equal ease</h4>
-    <img src="https://bonvision.github.io/assets/Images/Demos/2AFC.gif" alt="2AFC in BonVision" width="45%" />
-    <img src="https://bonvision.github.io/assets/Images/DemoGIFs/MonkeyGrating.gif" alt="3D scene in BonVision" width="45%" /><br>
-    <a href="https://bonvision.github.io/">bonvision.github.io</a>
-  </section>
   <section>
-    <h4>Map logical displays to 3D space</h4>
-    <img src="https://bonvision.github.io/assets/Images/DisplayLogic/CubeMapSkybox.png" alt="BonVision cube mapping" width="45%" />
-    <img src="https://bonvision.github.io/assets/Images/DisplayLogic/CubemapEnvironment.gif" alt="Cubemap environment" width="45%" />
-    <a href="https://bonvision.github.io/">bonvision.github.io</a>
+    <h4>Multi-animal tracking</h4>
+    <img src="../../assets/images/bonsai-bonzeb.svg" alt="BonZeb" />
+    <video data-autoplay src="https://github.com/ncguilbeault/BonZeb/raw/master/Videos/Supplemental%20Video%203%20-%20Multi%20Animal%20OMR.mp4"></video>
+    <a href="https://ncguilbeault.github.io/BonZeb/">ncguilbeault.github.io/BonZeb</a>
   </section>
 </section>
 
@@ -290,58 +256,39 @@ On the nature of systems neuroscience tools:
 
 ---
 
+###### Delay
+
+![Delay](../../assets/images/delay.svg)
+
+---
+
+###### DelaySubscription / SubscribeWhen
+
+![DelaySubscription](../../assets/images/delaysubscription.svg)
+
+---
+
+###### Repeat
+
+![Delay](../../assets/images/repeat.svg)
+
+---
+
+###### Zip
+
+![Zip](../../assets/images/zip.svg)
+
+---
+
 ###### CombineLatest
 
 ![CombineLatest](../../assets/images/combinelatest.svg)
 
 ---
 
-<!-- .element: data-transition="default none" -->
-###### Transform
+###### WithLatestFrom
 
-![Transform](../../assets/images/transform.svg)
-
---
-
-<!-- .element: data-transition="default none" -->
-###### Select
-
-![Select](../../assets/images/select.svg)
-
---
-
-<!-- .element: data-transition="none default" -->
-###### SelectMany
-
-![SelectMany](../../assets/images/selectmany.svg)
-
---
-
-<!-- .element: data-transition="none default" -->
-###### SelectMany: Play audio on cue
-
-![SelectMany](../../assets/images/selectmany-playsound-1.svg)
-
---
-
-<!-- .element: data-transition="none default" -->
-###### SelectMany: Play audio on cue
-
-![SelectMany](../../assets/images/selectmany-playsound-2.svg)
-
----
-
-<!-- .element: data-transition="default none" -->
-###### TriggeredWindow
-
-![TriggeredWindow](../../assets/images/triggeredwindow.svg)
-
---
-
-<!-- .element: data-transition="none default" -->
-###### TriggeredWindow: Record triggered video
-
-![SelectMany](../../assets/images/triggeredwindow-recordclip.svg)
+![WithLatestFrom](../../assets/images/withlatestfrom.svg)
 
 </script>
 </section>
@@ -349,12 +296,20 @@ On the nature of systems neuroscience tools:
 <section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
 <script type="text/template">
 
-### Questions / Brainstorm
-
 ![Bonsai](../../assets/images/bonsai-lettering.svg)
 
-Join us in the forums:
-https://groups.google.com/d/forum/bonsai-users
+### Questions?
+[neurogears.org/vrp-2021](https://neurogears.org/vrp-2021)
+<table style="width: 100%;">
+  <tr>
+    <th style="vertical-align: middle; width: 50%; height: 100px; padding-left: 100px">
+      <img alt="NeuroGEARS" src="../../assets/images/neurogears.svg"/>
+    </th>
+    <th style="vertical-align: middle; width: 50%; height: 100px; align: right">
+      <img alt="Cajal" src="../../assets/images/cajal.png"/>
+    </th>
+  </tr>
+</table>
 
 </script>
 </section>
