@@ -179,7 +179,7 @@ On the nature of systems neuroscience tools:
 <!-- .element: data-transition="none" -->
 ![Workflow](../../assets/images/framepicker-sample.svg)
 <!-- .element: style="display: inline-block; vertical-align: middle;" -->
-![Marble diagram](../../assets/images/sample.svg)
+![Marble diagram](../../assets/images/grayscalesample.svg)
 <!-- .element: style="display: inline-block; vertical-align: middle;" -->
 
 --
