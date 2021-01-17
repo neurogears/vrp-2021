@@ -123,6 +123,7 @@ In order to communicate and interact with an Arduino using Bonsai, you must prog
 * Set the `Pin` property of the `ServoOutput` operator to 9.
 * Configure the `PortName` property.
 * Connect a servo motor to the Arduino pin 9 and run the workflow. Can you explain the behaviour of the servo?
+* **Optional:** Make the servo sweep back and forth.
 
 Video Tracking
 --------------
