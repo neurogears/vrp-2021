@@ -4,6 +4,8 @@ title: NeuroKit
 permalink: /neurokit/
 ---
 
+This page will be updated throughout the first day, but in the meantime you can find detailed instructions in the following document: [Hardware Instructions](https://neurogears-my.sharepoint.com/:b:/g/personal/g_lopes_neurogears_org/ERI2YoXdKVhJhUypwCm4Qa0B9-9_7280LWMvAAe_2CP91Q?e=96PrCv).
+
 When attending this course, you should have received a NeuroKit containing the following components:
 
   * 1x Webcam ([**url**](https://www.amazon.co.uk/gp/product/B07KMXR1BR/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1))
