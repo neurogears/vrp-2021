@@ -23,6 +23,7 @@ exclude:
   - "**README.md"
 
 header_pages:
+  - _pages/neurokit.md
   - _pages/slides.md
   - _pages/worksheets.md
 
