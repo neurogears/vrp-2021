@@ -43,7 +43,11 @@ On the nature of systems neuroscience tools:
 
 ---
 
-![Devices compatible with Bonsai](../../assets/images/bonsai-applications.svg)
+![Devices compatible with Bonsai](../../assets/images/devices.jpg)
+
+---
+
+![Applications in Neuroscience](../../assets/images/bonsai-applications.svg)
 
 </script>
 </section>
@@ -80,7 +84,7 @@ On the nature of systems neuroscience tools:
 <section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
 <script type="text/template">
 
-![Devices compatible with Bonsai](../../assets/images/bonsai-packages.svg)
+![Bonsai Ecosystem](../../assets/images/bonsai-packages.svg)
 
 </script>
 </section>
