@@ -30,3 +30,6 @@ When attending this course, you should have received a NeuroKit containing the f
 
 ![IO Expansion Board]({{ site.baseurl }}/assets/images/IOExpansionBoard.png)
 {: .notice--info}
+
+**Note:** More info on hardware assembly available in here ([**PDF**]({{ site.baseurl }}/assets/HardwareWorksheet.pdf))
+
