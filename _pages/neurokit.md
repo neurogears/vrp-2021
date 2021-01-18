@@ -4,7 +4,7 @@ title: NeuroKit
 permalink: /neurokit/
 ---
 
-This page will be updated throughout the first day, but in the meantime you can find detailed instructions in the following document: [Hardware Instructions](https://neurogears-my.sharepoint.com/:b:/g/personal/g_lopes_neurogears_org/ERI2YoXdKVhJhUypwCm4Qa0B9-9_7280LWMvAAe_2CP91Q?e=96PrCv).
+This page will be updated throughout the first day, but in the meantime you can find detailed instructions in the following document: [Hardware Instructions]({{ site.baseurl }}/assets/HardwareWorksheet.pdf).
 
 When attending this course, you should have received a NeuroKit containing the following components:
 
