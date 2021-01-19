@@ -28,7 +28,7 @@ permalink: /slides/bonsai-dlc/
 
 ---
 
-#### Bonsai DLC Workflow
+#### Bonsai + DeepLabcut Workflow
 
 ![Bonsai + DLC Workflow](../../assets/images/bonsai-dlc-workflow.svg)
 
