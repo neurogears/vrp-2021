@@ -14,6 +14,24 @@ permalink: /slides/higher-order/
 
 ---
 
+###### Delay
+
+![Delay](../../assets/images/delay.svg)
+
+---
+
+###### DelaySubscription / SubscribeWhen
+
+![DelaySubscription](../../assets/images/delaysubscription.svg)
+
+---
+
+###### Repeat
+
+![Delay](../../assets/images/repeat.svg)
+
+---
+
 ### Sharing observable sequences
 
 ![Branching](../../assets/images/branching-simple.svg)
