@@ -16,7 +16,7 @@ The task begins with an inter-trial interval (`ITI`), followed by stimulus prese
 
 The exercises below will show you how to translate the above diagram of states and events into an equivalent Bonsai workflow, which can be easily adapted and modified to describe many different operant behaviour tasks.
 
-### **Exercise 1:** Declaring and logging external events
+### **Exercise 1:** Declaring and logging external hardware events
 
 In this worksheet, we will be using an Arduino or a camera as an interface to detect external behaviour events. For experimental purposes, it is very helpful to record and timestamp _all_ of these events, independently of which state the task is in.
 
@@ -24,9 +24,16 @@ In this worksheet, we will be using an Arduino or a camera as an interface to de
 
 * Connect a digital sensor (e.g. beam-break, button, TTL) into Arduino pin 8.
 * Insert a `DigitalInput` source and set it to Arduino pin 8.
-* Insert a `Timestamp` combinator.
+* Insert a `PublishSubject` operator and set its `Name` property to `Response`.
+* Insert a `Timestamp` operator.
 * Insert a `CsvWriter` sink and configure its `FileName` property with a file name ending in `.csv`.
 * Run the workflow and activate the digital sensor a couple of times. Stop the workflow and confirm that the events were successfully timestamped and logged in the `.csv` file.
+
+**Note**: In order to avoid hardware side-effects, it is highly recommended to declare all hardware connections at the top-level of the workflow, and interface all trial logic using subject variables. This will have the added benefit of allowing for very easy and centralized replacement of the rig hardware: as long as the new inputs and configurations are compatible with the logical subjects, no code inside the task logic will have to be changed at all.
+{: .notice--info}
+
+* Right-click the `DigitalInput` source, select `Create Source (bool)` > `BehaviorSubject`, and set its `Name` property to `Led`.
+* Insert a `DigitalOutput` sink and set it to Arduino pin 13.
 
 ### **Exercise 2:** Inter-trial interval and stimulus presentation
 
@@ -46,7 +53,7 @@ Translating a state machine diagram into a Bonsai workflow begins by identifying
 {: .notice--info}
 
 * Insert a `Boolean` operator following `Source1` and set its `Value` property to `True`.
-* Insert a `DigitalOutput` sink and set it to Arduino pin 13.
+* Find and right-click the `Led` subject in the toolbox and select the option `Multicast`.
 * Run the workflow a couple of times and verify that the sequence of events is progressing correctly.
 
 **Note:** Opening a new connection to the Arduino can take several seconds due to the way the Firmata protocol is implemented. This may introduce a slight delay in starting the task. This delay is only present at the start of execution and will not affect the behavior of the state machine.
@@ -78,9 +85,9 @@ Translating a state machine diagram into a Bonsai workflow begins by identifying
 ![Stimulus response input control]({{ site.baseurl }}/assets/images/statemachine-stimulus-response-input.svg)
 {: .notice--info}
 
-* Insert a `DigitalInput` source and set it to Arduino pin 8.
-* Insert a `Take` operator and set its `Count` property to 1.
+* Subscribe to the `Response` subject in the toolbox.
 * Insert a `Boolean` operator and set its `Value` property to `True`.
+* Insert a `Take` operator and set its `Count` property to 1.
 * Delete the `Source1` operator.
 * Connect the `Boolean` operator to `WorkflowOutput`.
 * Run the workflow a couple of times and validate the state machine is responding to the button press.
@@ -94,7 +101,6 @@ Translating a state machine diagram into a Bonsai workflow begins by identifying
 * Inside the `Response` node, insert a `Timer` source and set its `DueTime` property to be about 1 second.
 * Insert a `Boolean` operator and set its `Value` property to `False`.
 * Join both `Boolean` operators with a `Merge` combinator.
-* Move the `Take` operator after `Merge`.
 * Connect the output of `Take` to `WorkflowOutput`.
 * Run the workflow a couple of times, opening the visualizer of the `Response` node.
 
@@ -128,7 +134,7 @@ Translating a state machine diagram into a Bonsai workflow begins by identifying
   * Insert a `Timer` node and set both the `DueTime` and the `Period` properties to 100ms.
   * Insert a `Mod` operator and set the `Value` property to 2.
   * Insert the `Equal` operator and leave its `Value` property at 0.
-  * Insert a `DigitalOutput` sink and set it to Arduino pin 13.
+  * Find and right-click the `Led` subject in the toolbox and select the option `Multicast`.
   * Insert a `Take` operator and set the `Count` property to 6.
   * Insert the `Last` operator.
 {: .notice--info}
